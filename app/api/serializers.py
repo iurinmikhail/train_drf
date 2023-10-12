@@ -1,7 +1,8 @@
-from rest_framework import serializers
+from rest_framework import serializers, viewsets
 
-from api.models import User, Dog, Elefant
+from api.models import User, Dog, Elefant, Mouse, Monkey
 
+dbs = {"base1": 1, "BASE2": 2}
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,13 +16,13 @@ class CatSerializer(serializers.Serializer):
     age = serializers.IntegerField()
 
 
-class DogSerialise(serializers.Serializer):
+class DogSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=100)
     color = serializers.CharField(max_length=100)
     age = serializers.IntegerField()
 
 
-class ElefantSerialise(serializers.Serializer):
+class ElefantSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=100)
     color = serializers.CharField(max_length=100)
     age = serializers.IntegerField()
@@ -35,3 +36,37 @@ class ElefantSerialise(serializers.Serializer):
         instance.age = validated_data.get('age', instance.age)
         instance.save()
         return instance
+
+
+class MouseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mouse
+        fields = ('name', 'color', 'age')
+
+
+# viewset
+
+class MonkeySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Monkey
+        fields = ('name', 'color', 'age')
+
+def multiple_of_ten(value):
+    db_lower = value.lower()
+    for k, v in dbs.items():
+        if k.lower() == db_lower:
+            return k
+
+    raise serializers.ValidationError('Not a multiple of ten')
+
+
+class DBValidationSerializer(serializers.Serializer):
+    db = serializers.CharField(max_length=50)
+
+    def validate_db(self, value):
+        db_lower = value.lower()
+        for k, v in dbs.items():
+            if k.lower() == db_lower:
+                return k
+
+        raise serializers.ValidationError('Not a multiple of ten')
