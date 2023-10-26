@@ -1,30 +1,11 @@
 import pytest
 
 from api.models import Mouse
-
-
-
-@pytest.fixture(scope='session', autouse=True)
-def setup_db():
-    print('Запуск очистки базы данных')
-    yield
-    print('Завершение очистки базы данных')
-
-@pytest.fixture
-def mouses():
-    mouses = [
-        {"name": 'Misha', "color": 'grey', "age": 37},
-        {"name": 'Sasha', "color": 'black', "age": 10},
-    ]
-    return mouses
+import logging
 
 
 def create_mouse(**kwargs):
     Mouse.objects.create(**kwargs)
-
-@pytest.fixture
-def delete_mouse():
-    Mouse.objects.all().delete()
 
 
 @pytest.mark.django_db
@@ -60,4 +41,3 @@ class TestMouse:
 
         for add_mouse in all_mouses:
             assert add_mouse.to_dict() in mouses
-

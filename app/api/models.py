@@ -1,3 +1,5 @@
+from dataclasses import asdict, dataclass, field
+
 from django.db import models
 
 
