@@ -3,7 +3,7 @@ from rest_framework.response import Response
 
 from .views import (
     index, UserApiView, CatApiView, DogApiView, ElefantApiView, MouseApiView,
-    MouseListApiView, MouseApiViewUpdate, MouseDetailApiView, MonkeyViewSet,
+    MouseListApiView, MouseApiViewUpdate, MouseDetailApiView, MonkeyViewSet, MouseApiSearchView,
 )
 
 from rest_framework.routers import SimpleRouter
@@ -46,7 +46,8 @@ urlpatterns = [
     path('v1/elefant', ElefantApiView.as_view(), name='elefant_api'),
     path('v1/elefant/<str:pk>/Patient/<int:pid>', ElefantApiView.as_view(), name='elefant_api'),
     path('v1/mouse', MouseApiView.as_view(), name='mouse_api'),
-    path('v1/mouse/<int:pk>', MouseApiViewUpdate.as_view(), name='mouse_api'),
+    path('v1/mouse_search/<int:pk>', MouseApiSearchView.as_view(), name='mouse_search'),
+    # path('v1/mouse/<int:pk>', MouseApiViewUpdate.as_view(), name='mouse_api'),
     path('v1/mousedetail/<int:pk>', MouseDetailApiView.as_view(), name='mousedetail_api'),
     path('v1/', include(router.urls)),
 

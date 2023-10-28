@@ -41,7 +41,8 @@ class ElefantSerializer(serializers.Serializer):
 class MouseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mouse
-        fields = ('name', 'color', 'age')
+        fields = '__all__'
+        read_only_fields = ('id',)
 
 
 # viewset

@@ -1,6 +1,4 @@
 import pytest
-import logging
-from api.models import Mouse
 from django.conf import settings
 
 

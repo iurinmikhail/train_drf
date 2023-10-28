@@ -7,6 +7,7 @@ from api.models import Mouse
 def delete_mouse():
     Mouse.objects.all().delete()
 
+
 @pytest.fixture
 def mouses():
     print('Подготовка данных')

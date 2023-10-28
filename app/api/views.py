@@ -1,6 +1,6 @@
 from django.forms import model_to_dict
-from django.http import HttpResponse
-from rest_framework import generics, viewsets
+from django.http import HttpResponse, Http404
+from rest_framework import generics, viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import serializers
@@ -113,17 +113,13 @@ class MouseDetailApiView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class MouseApiView(APIView):
-    def get(self, request):
-        lst = Mouse.objects.all().values()
-        serializer = MouseSerializer(lst, many=True)
-        return Response({'data': serializer.data})
 
     def post(self, request):
         serializer = MouseSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response({'data': serializer.data})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, *args, **kwargs):
         pk = kwargs.get('pk', None)
@@ -141,6 +137,17 @@ class MouseApiView(APIView):
 
         return Response({'data': serializer.data})
 
+class MouseApiSearchView(APIView):
+    def get_object(self, pk):
+        try:
+            return Mouse.objects.get(id=pk)
+        except Mouse.DoesNotExist as e:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        mouse = self.get_object(pk=pk)
+        serializer = MouseSerializer(mouse)
+        return Response(serializer.data)
 
 #  ViewSet
 
