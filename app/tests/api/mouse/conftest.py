@@ -10,9 +10,9 @@ def delete_mouse():
 
 @pytest.fixture
 def mouses():
-    print('Подготовка данных')
+    print("Подготовка данных")
     mouses = [
-        {"name": 'Misha', "color": 'grey', "age": 37},
-        {"name": 'Sasha', "color": 'black', "age": 10},
+        {"name": "Misha", "color": "grey", "age": 37},
+        {"name": "Sasha", "color": "black", "age": 10},
     ]
     return mouses

@@ -1,7 +1,8 @@
+import logging
+
 import pytest
 
 from api.models import Mouse
-import logging
 
 
 def create_mouse(**kwargs):
@@ -26,9 +27,8 @@ def test_list_mouses(mouses, delete_mouse):
 
 
 @pytest.mark.django_db
-@pytest.mark.usefixtures('delete_mouse')
+@pytest.mark.usefixtures("delete_mouse")
 class TestMouse:
-
     def test_mouse(self, mouses):
         for mouse in mouses:
             create_mouse(**mouse)

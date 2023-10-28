@@ -1,6 +1,7 @@
 from celery import shared_task
 from django.contrib.auth.models import User
 
+
 @shared_task
 def multiply_numbers(a, b):
     return a * b

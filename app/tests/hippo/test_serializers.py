@@ -20,7 +20,7 @@ def test_invalid_hippo_serializer():
         "color": "test",
     }
     serializer = HippoSerializer(data=invalid_serializer_data)
-    assert not  serializer.is_valid()
+    assert not serializer.is_valid()
     assert serializer.validated_data == {}
     assert serializer.data == invalid_serializer_data
     assert serializer.errors == {"age": ["This field is required."]}
