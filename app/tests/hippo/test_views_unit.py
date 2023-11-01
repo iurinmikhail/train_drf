@@ -74,7 +74,8 @@ def test_get_all_hippo(client, monkeypatch):
 def test_remove_hippo(client, monkeypatch):
     def mock_get_object(self, pk):
         class Hippo:
-            def delete(self):
+            @staticmethod
+            def delete():
                 pass
 
         return Hippo
@@ -93,3 +94,5 @@ def test_remove_hippo_incorrect_id(client, monkeypatch):
 
     resp = client.delete("/hippo/99/")
     assert resp.status_code == 404
+
+

@@ -47,9 +47,7 @@ urlpatterns = [
     path("v1/mouse", MouseApiView.as_view(), name="mouse_api"),
     path("v1/mouse_search/<int:pk>", MouseApiSearchView.as_view(), name="mouse_search"),
     # path('v1/mouse/<int:pk>', MouseApiViewUpdate.as_view(), name='mouse_api'),
-    path(
-        "v1/mousedetail/<int:pk>", MouseDetailApiView.as_view(), name="mousedetail_api"
-    ),
+    path("v1/mousedetail/<int:pk>", MouseDetailApiView.as_view(), name="mousedetail_api"),
     path("v1/", include(router.urls)),
     # path('v1/monkey/<int:pk>', MonkeyViewSet.as_view({'put': "update"}), name='monkey_api'),
     # path('v1/monkey/', MonkeyViewSet.as_view({'get': "list", 'post': "create"}), name='monkey_api'),
