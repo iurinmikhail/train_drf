@@ -26,6 +26,7 @@ class Cat(models.Model):
     def __repr__(self):
         return self.name
 
+
 class Dog(models.Model):
     name = models.CharField(max_length=100)
     color = models.CharField(max_length=100)
@@ -50,7 +51,6 @@ class Elefant(models.Model):
         return self.name
 
 
-
 class Mouse(models.Model):
     name = models.CharField(max_length=100)
     color = models.CharField(max_length=100)
@@ -64,11 +64,10 @@ class Mouse(models.Model):
 
     def to_dict(self):
         return {
-            'name': self.name,
-            'color': self.color,
-            'age': self.age,
+            "name": self.name,
+            "color": self.color,
+            "age": self.age,
         }
-
 
     def __eq__(self, other):
         if not isinstance(other, type(self)):
@@ -89,4 +88,3 @@ class Monkey(models.Model):
 
     def __repr__(self):
         return self.name
-

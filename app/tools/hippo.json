@@ -1,0 +1,30 @@
+[
+  {
+    "model": "hippo.hippo",
+    "pk": 1,
+    "fields": {
+      "name": "Harry",
+      "color": "purple",
+      "age": 10
+    }
+  },
+  {
+    "model": "hippo.hippo",
+    "pk": 2,
+    "fields": {
+      "name": "Hermione",
+      "color": "pink",
+      "age": 10
+    }
+  },
+  {
+    "model": "hippo.hippo",
+    "pk": 3,
+    "fields": {
+      "name": "Ron",
+      "color": "orange",
+      "age": 10
+    }
+  }
+]
+

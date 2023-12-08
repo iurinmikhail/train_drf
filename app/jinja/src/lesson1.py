@@ -1,8 +1,7 @@
 from jinja2 import Template
 
-name = 'John'
+name = "John"
 
-template = Template('Hello {{ name }}!')
+template = Template("Hello {{ name }}!")
 
 print(template.render(name=name))
-

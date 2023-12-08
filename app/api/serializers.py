@@ -1,13 +1,14 @@
 from rest_framework import serializers, viewsets
 
-from api.models import User, Dog, Elefant, Mouse, Monkey
+from api.models import Dog, Elefant, Monkey, Mouse, User
 
 dbs = {"base1": 1, "BASE2": 2}
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = "__all__"
 
 
 class CatSerializer(serializers.Serializer):
@@ -31,9 +32,9 @@ class ElefantSerializer(serializers.Serializer):
         return Elefant.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.name = validated_data.get('name', instance.name)
-        instance.color = validated_data.get('color', instance.color)
-        instance.age = validated_data.get('age', instance.age)
+        instance.name = validated_data.get("name", instance.name)
+        instance.color = validated_data.get("color", instance.color)
+        instance.age = validated_data.get("age", instance.age)
         instance.save()
         return instance
 
@@ -41,16 +42,18 @@ class ElefantSerializer(serializers.Serializer):
 class MouseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mouse
-        fields = '__all__'
-        read_only_fields = ('id',)
+        fields = "__all__"
+        read_only_fields = ("id",)
 
 
 # viewset
 
+
 class MonkeySerializer(serializers.ModelSerializer):
     class Meta:
         model = Monkey
-        fields = ('name', 'color', 'age')
+        fields = ("name", "color", "age")
+
 
 def multiple_of_ten(value):
     db_lower = value.lower()
@@ -58,7 +61,7 @@ def multiple_of_ten(value):
         if k.lower() == db_lower:
             return k
 
-    raise serializers.ValidationError('Not a multiple of ten')
+    raise serializers.ValidationError("Not a multiple of ten")
 
 
 class DBValidationSerializer(serializers.Serializer):
@@ -70,4 +73,4 @@ class DBValidationSerializer(serializers.Serializer):
             if k.lower() == db_lower:
                 return k
 
-        raise serializers.ValidationError('Not a multiple of ten')
+        raise serializers.ValidationError("Not a multiple of ten")

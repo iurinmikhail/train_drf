@@ -7,8 +7,12 @@ from .models import Hippo
 @admin.register(Hippo)
 class MovieAdmin(admin.ModelAdmin):
     fields = (
-        "name", "color", "age",
+        "name",
+        "color",
+        "age",
     )
     list_display = (
-        "name", "color", "age",
+        "name",
+        "color",
+        "age",
     )
